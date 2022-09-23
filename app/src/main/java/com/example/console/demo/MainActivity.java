@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         //重启进程
         restartButton.setOnClickListener(view -> {
             try {
-                consoleModel.restart("su");
+                consoleModel.restart("sh");
             } catch (IOException e) {
                 e.printStackTrace();
                 toast(e.toString());
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initConsole() throws IOException {
-        consoleModel = ConsoleModel.newInstance("su");
+        consoleModel = ConsoleModel.newInstance("sh");
         //解决重载后log消失的情况
         for (ConsoleModel.LogcatBody logcatBody : consoleModel.getLogcatList()) {
             logcatTextView.append(Html.fromHtml(setColor(logcatBody.getMessage(), logcatBody.getType() == ConsoleModel.CONSOLE_TYPE_SUCCESS ? "green" : "red")));
@@ -105,7 +105,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     private String setColor(String content, String dexColor){
-        System.out.println(dexColor);
         return "<font color=\"" + dexColor + "\" >message > " + content + "</font><br/>";
     }
 

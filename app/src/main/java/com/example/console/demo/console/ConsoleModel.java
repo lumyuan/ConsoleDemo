@@ -32,7 +32,7 @@ public class ConsoleModel {
         errorData.observe(observer);
     }
 
-    private final Process process;
+    private Process process;
     private static volatile ConsoleModel consoleModel;
 
     private ConsoleModel(String cmd) throws IOException {
@@ -76,7 +76,8 @@ public class ConsoleModel {
     }
 
     public void restart(String cmd) throws IOException {
-        initProcess(cmd);
+        destroy();
+        process = initProcess(cmd);
     }
 
     public void exec(String cmd) throws IOException {
