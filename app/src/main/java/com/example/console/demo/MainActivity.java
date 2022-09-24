@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView logcatTextView;
 
     private ConsoleModel consoleModel;
+    private boolean isInput = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +42,14 @@ public class MainActivity extends AppCompatActivity {
             String cmd = inputView.getText().toString();
             if (consoleModel != null){
                 try {
+                    isInput = true;
                     showInput(cmd);
                     inputView.setText("");
                     consoleModel.exec(cmd);
                 } catch (IOException e) {
                     e.printStackTrace();
                     toast(e.toString());
-                    showInput(e.toString());
+                    showErrorLog(e.toString());
                 }
             }else {
                 toast("执行失败！控制台对象为空");
@@ -105,7 +107,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     private String setColor(String content, String dexColor){
-        return "<font color=\"" + dexColor + "\" >message > " + content + "</font><br/>";
+        String html = "<font color=\"" + dexColor + "\" >" + (isInput ? "message > " : "")
+                + content + "</font><br/>";
+        isInput = false;
+        return html;
     }
 
 }
