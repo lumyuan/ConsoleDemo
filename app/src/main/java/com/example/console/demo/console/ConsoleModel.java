@@ -13,7 +13,7 @@ import java.util.List;
 
 public class ConsoleModel {
 
-    public static final String CONSOLE_PERMISSION_SHELL = "shell";
+    public static final String CONSOLE_PERMISSION_SHELL = "sh";
     public static final String CONSOLE_PERMISSION_SU = "su";
 
     public static final int CONSOLE_TYPE_SUCCESS = 0;
